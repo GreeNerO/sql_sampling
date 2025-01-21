@@ -5,9 +5,10 @@ ORDER BY duration DESC
 LIMIT 1;
 
 --Название треков, продолжительность которых не менее 3,5 минут:
-SELECT title 
+SELECT * 
 FROM tracks 
-WHERE (EXTRACT(MINUTE FROM duration) * 60 + EXTRACT(SECOND FROM duration)) >= 210;
+WHERE duration >= '00:03:30';
+
 
 --Названия сборников, вышедших в период с 2018 по 2020 год включительно:
 SELECT title 
@@ -20,9 +21,10 @@ FROM artists
 WHERE name NOT LIKE '% %'; -- Имя без пробелов
 
 --Название треков, которые содержат слово «мой» или «my»:
-SELECT title 
-FROM tracks 
-WHERE LOWER(title) LIKE '%мой%' OR LOWER(title) LIKE '%my%';
+SELECT title
+FROM tracks
+WHERE string_to_array(lower(title), ' ') && ARRAY['my', 'мой'];
+
 
 --Количество исполнителей в каждом жанре:
 SELECT g.name AS genre, COUNT(ag.artist_id) AS artist_count
@@ -45,9 +47,13 @@ GROUP BY a.title;
 --Все исполнители, которые не выпустили альбомы в 2020 году:
 SELECT ar.name AS artist_name
 FROM artists ar
-LEFT JOIN album_artists aa ON ar.artist_id = aa.artist_id
-LEFT JOIN albums al ON aa.album_id = al.album_id AND al.release_year = 2020
-WHERE al.album_id IS NULL;
+WHERE ar.artist_id NOT IN (
+    SELECT aa.artist_id
+    FROM album_artists aa
+    JOIN albums al ON aa.album_id = al.album_id
+    WHERE al.release_year = 2020
+);
+
 
 --Названия сборников, в которых присутствует конкретный исполнитель (например, 'Queen'):
 SELECT DISTINCT c.title AS collection_title

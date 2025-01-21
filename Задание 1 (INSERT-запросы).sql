@@ -21,7 +21,7 @@ INSERT INTO artist_genres (artist_id, genre_id) VALUES
 -- Вставляем альбомы
 INSERT INTO albums (album_id, title, release_year) VALUES
 (1, 'Abbey Road', 1969),
-(2, '1989', 2014),
+(2, '1989', 2020),
 (3, 'Kind of Blue', 1959),
 (4, 'A Night at the Opera', 1975);
 
@@ -34,14 +34,15 @@ INSERT INTO album_artists (album_id, artist_id) VALUES
 
 -- Вставляем треки
 INSERT INTO tracks (track_id, title, album_id, duration) VALUES
-(1, 'Come Together', 1, '04:20'),
-(2, 'Here Comes the Sun', 1, '03:05'),
-(3, 'Shake It Off', 2, '03:39'),
-(4, 'Blank Space', 2, '03:51'),
-(5, 'So What', 3, '09:04'),
-(6, 'Freddie Freeloader', 3, '09:46'),
-(7, 'Bohemian Rhapsody', 4, '05:55'),
-(8, 'Love of My Life', 4, '03:38');
+(1, 'Come Together', 1, '00:04:20'),
+(2, 'Here Comes the Sun', 1, '00:03:05'),
+(3, 'Shake It Off', 2, '00:03:39'),
+(4, 'Blank Space', 2, '00:03:51'),
+(5, 'So What', 3, '00:09:04'),
+(6, 'Freddie Freeloader', 3, '00:09:46'),
+(7, 'Bohemian Rhapsody', 4, '00:05:55'),
+(8, 'Love of My Life', 4, '00:03:38');
+
 
 -- Вставляем сборники
 INSERT INTO collections (collection_id, title, release_year) VALUES
